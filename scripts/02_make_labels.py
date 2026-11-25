@@ -26,7 +26,10 @@ def main():
     ev_col, t_col = args.endpoint, f"{args.endpoint}.time"
 
     cdr = pd.read_excel(args.cdr, sheet_name="TCGA-CDR")
-    cdr = cdr[cdr["type"] == cancer][["bcr_patient_barcode", ev_col, t_col]]
+    cdr = cdr[cdr["type"] == cancer]
+    if "Redaction" in cdr.columns:  # bệnh nhân bị TCGA thu hồi dữ liệu
+        cdr = cdr[cdr["Redaction"].isna()]
+    cdr = cdr[["bcr_patient_barcode", ev_col, t_col]]
     cdr = cdr.rename(columns={"bcr_patient_barcode": "case_id", ev_col: "event", t_col: "time"})
     cdr["event"] = pd.to_numeric(cdr["event"], errors="coerce")
     cdr["time"] = pd.to_numeric(cdr["time"], errors="coerce")

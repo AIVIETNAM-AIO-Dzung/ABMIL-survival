@@ -15,6 +15,7 @@ dependencies = [
     "openslide-python>=1.4.7",
     "pandas>=2.3.3",
     "pyyaml>=6.0.4",
+    "requests>=2.34.2",
     "scikit-learn>=1.7.2",
     "scipy>=1.15.3",
     "timm>=1.0.31",

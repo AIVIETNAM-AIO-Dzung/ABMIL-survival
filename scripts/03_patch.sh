@@ -6,8 +6,9 @@ set -euo pipefail
 COHORT=${1:?"Cần tên cohort, vd. TCGA-LUAD"}
 PROJ=$(cd "$(dirname "$0")/.." && pwd)
 PY=${PY:-${PROJ}/.venv/bin/python}
-SRC=${PROJ}/data/${COHORT}/slides
-OUT=${PROJ}/data/${COHORT}/patches
+DATA_ROOT=${DATA_ROOT:-${PROJ}/data}
+SRC=${DATA_ROOT}/${COHORT}/slides
+OUT=${DATA_ROOT}/${COHORT}/patches
 
 "${PY}" "${PROJ}/scripts/03_split_by_mag.py" --source "${SRC}" --save_dir "${OUT}"
 

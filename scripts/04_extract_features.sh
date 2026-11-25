@@ -13,7 +13,8 @@ COHORT=${1:?"Cần tên cohort, vd. TCGA-LUAD"}
 BS=${2:-256}
 PROJ=$(cd "$(dirname "$0")/.." && pwd)
 PY=${PY:-${PROJ}/.venv/bin/python}
-ROOT=${PROJ}/data/${COHORT}
+DATA_ROOT=${DATA_ROOT:-${PROJ}/data}
+ROOT=${DATA_ROOT}/${COHORT}
 
 if [ -z "${UNI_CKPT_PATH:-}" ]; then
     export UNI_CKPT_PATH=$("${PY}" -c "
